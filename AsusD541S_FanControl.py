@@ -1,6 +1,20 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import sys
+debug = False
+if len(sys.argv) > 1:
+	if sys.argv[1] == "-h" or sys.argv[1] == "--help":
+		print("""Asus D541S Auto Fan Control script
+
+		Options:
+		-d, --debug\tactivate debug info (show temperature & fan status)
+		-h, --help\tshow this text
+		""")
+		exit()
+	if any(x for x in ("-d", "--debug") if x in sys.argv):
+		debug = True
+
 import psutil
 import subprocess
 import atexit
@@ -11,7 +25,6 @@ CMD_STOP = "sudo echo 2 | sudo tee /sys/class/hwmon/hwmon4/pwm1"
 STOP_TRIGGER = 40.0
 START_TRIGGER = 50.0
 FREQ = 5
-DEBUG = True
 
 @atexit.register
 def atexit_f():
@@ -19,12 +32,12 @@ def atexit_f():
 
 def start():
 	subprocess.call(CMD_START, shell=True)
-	if DEBUG:
+	if debug:
 		print("Fan started")
 
 def stop():
 	subprocess.call(CMD_STOP, shell=True)
-	if DEBUG:
+	if debug:
 		print("Fan stopped")
 
 fanon = False
@@ -46,7 +59,7 @@ while True:
 			values += 1
 	finaltemp = currents / values
 	
-	if DEBUG:
+	if debug:
 		print(finaltemp)
 		
 	if fanon and finaltemp <= STOP_TRIGGER: #STOP THE FAN
