@@ -20,8 +20,8 @@ import subprocess
 import atexit
 from time import sleep
 
-CMD_START = "sudo echo 2 | sudo tee /sys/class/hwmon/hwmon4/pwm1_enable"
-CMD_STOP = "sudo echo 2 | sudo tee /sys/class/hwmon/hwmon4/pwm1"
+CMD_START = "sudo echo 2 | sudo tee /sys/class/hwmon/hwmon3/pwm1_enable"
+CMD_STOP = "sudo echo 2 | sudo tee /sys/class/hwmon/hwmon3/pwm1"
 STOP_TRIGGER = 40.0
 START_TRIGGER = 50.0
 FREQ = 5
