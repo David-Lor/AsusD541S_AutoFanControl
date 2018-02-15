@@ -48,11 +48,11 @@ while True:
 	""">>> psutil.sensors_temperatures()
 	{'soc_dts0': [shwtemp(label='', current=49.0, high=None, critical=None)], 'coretemp': [shwtemp(label='Core 0', current=57.0, high=90.0, critical=90.0), shwtemp(label='Core 2', current=53.0, high=90.0, critical=90.0)], 'soc_dts1': [shwtemp(label='', current=49.0, high=None, critical=None)], 'acpitz': [shwtemp(label='', current=63.0, high=95.0, critical=95.0), shwtemp(label='', current=63.0, high=94.0, critical=94.0)], 'asus': [shwtemp(label='', current=6280.0, high=None, critical=None)]}"""
 	temperatures = psutil.sensors_temperatures()
-	currents = 0.0 #Sumatorio de todas las temperaturas útiles detectadas
-	values = 0 #Número de temperaturas útiles detectadas y sumadas a currents
+	currents = 0.0 #Sum of all the useful values detected
+	values = 0 #Number of useful temperature values detected and used
 	
 	for label in temperatures:
-		if label == "asus":
+		if label == "asus": #This temperature is fake
 			continue
 		for shwtemp in temperatures[label]:
 			currents += shwtemp.current
