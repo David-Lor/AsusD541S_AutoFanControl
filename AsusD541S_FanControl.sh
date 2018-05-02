@@ -60,4 +60,4 @@ function main { # Main loop
 main
 
 startFan
-echo "Adiós!"
+echo "End of script" # debug
